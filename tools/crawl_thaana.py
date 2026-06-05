@@ -137,6 +137,7 @@ def crawl_family(slug: str) -> dict | None:
         fam["version"] = version
     if desc:
         fam["description"] = desc
+    fam["homepage"] = urljoin(BASE, f"{slug}/")
     fam["files"] = [{"label": "Variable" if variable else "Static",
                      "format": "TTF", "archive": "zip", "url": url}]
     return fam

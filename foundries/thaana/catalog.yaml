@@ -8,6 +8,7 @@ families:
   name: Bolhu
   variable: true
   description: Bolhu is a variable Thaana font that is also available in 9 weights.
+  homepage: https://thaana.com/bolhu/
   files:
   - label: Variable
     format: TTF
@@ -19,6 +20,7 @@ families:
   category:
   - handwriting
   description: Faagathi Dheli features letterforms inspired by handwritten manuscripts of the early 1900s.
+  homepage: https://thaana.com/faagathi-dheli/
   files:
   - label: Static
     format: TTF
@@ -33,6 +35,7 @@ families:
   version: '02'
   description: Faagathi Neon is a monoline version of Faagathi Dheli that features letterforms inspired by handwritten manuscripts
     of the early 1900s.
+  homepage: https://thaana.com/faagathi-neon/
   files:
   - label: Static
     format: TTF
@@ -45,6 +48,7 @@ families:
   - display
   version: '1.10'
   description: Faaru Punk is a Thaana punk font. Available in 2 weights and features reverse slant, cut strokes and irregularity.
+  homepage: https://thaana.com/faaru-punk/
   files:
   - label: Static
     format: TTF
@@ -56,6 +60,7 @@ families:
   category:
   - sans
   description: Fanara is a Thaana geometric typeface in 4 weights.
+  homepage: https://thaana.com/fanara/
   files:
   - label: Static
     format: TTF
@@ -66,6 +71,7 @@ families:
   variable: true
   version: '2.10'
   description: Fanara Golhi is a variable Thaana font that is also available in 9 weights.
+  homepage: https://thaana.com/fanara-golhi/
   files:
   - label: Variable
     format: TTF
@@ -77,6 +83,7 @@ families:
   category:
   - display
   description: Fiyuzu is a Thaana display typeface designed in 2002
+  homepage: https://thaana.com/fiyuzu/
   files:
   - label: Static
     format: TTF
@@ -89,6 +96,7 @@ families:
   - display
   version: '1.12'
   description: Gurafiku is an irregular Thaana display font. Featuring crude angular letterforms - straight lines for everything.
+  homepage: https://thaana.com/gurafiku/
   files:
   - label: Static
     format: TTF
@@ -101,6 +109,7 @@ families:
   - handwriting
   version: 1.0a
   description: Haluvidhaa is a funky bubbly Thaana font designed for cute energetic designs.
+  homepage: https://thaana.com/haluvidhaa/
   files:
   - label: Static
     format: TTF
@@ -113,6 +122,7 @@ families:
   - handwriting
   version: '1.12'
   description: Hawwa is a lively multi-purpose Thaana brush font.
+  homepage: https://thaana.com/hawwa/
   files:
   - label: Static
     format: TTF
@@ -124,6 +134,7 @@ families:
   category:
   - sans
   description: Kolhu is an upright grotesk, a variable Thaana font also available in 9 weights.
+  homepage: https://thaana.com/kolhu/
   files:
   - label: Variable
     format: TTF
@@ -136,6 +147,7 @@ families:
   - display
   version: '1.12'
   description: LCD Thaana is a typeface that mimics segmented LCD displays
+  homepage: https://thaana.com/lcd-thaana/
   files:
   - label: Static
     format: TTF
@@ -147,6 +159,7 @@ families:
   category:
   - monospace
   description: Masnooee Mono is a Thaana monospaced typeface
+  homepage: https://thaana.com/masnooee-mono/
   files:
   - label: Static
     format: TTF
@@ -158,6 +171,7 @@ families:
   category:
   - handwriting
   description: Motaru Dhigu is a Thaana typeface based on natural handwriting with exaggerated elongated strokes.
+  homepage: https://thaana.com/motaru-dhigu/
   files:
   - label: Static
     format: TTF
@@ -169,6 +183,7 @@ families:
   category:
   - display
   description: Motaru Square is a Thaana typeface designed with perfect square edges.
+  homepage: https://thaana.com/motaru-square/
   files:
   - label: Static
     format: TTF
@@ -183,6 +198,7 @@ families:
   version: '1.12'
   description: Sangu Suruhee is a Thaana headline typeface that was used in the 1990 news magazine Sangu. It was originally
     created as a stencil by Adam Ibrahim (Fankaa) for Studio-1. This grotesk form was redrawn and digitised by Hasan Shazil.
+  homepage: https://thaana.com/sangu-suruhee/
   files:
   - label: Static
     format: TTF
@@ -192,6 +208,7 @@ families:
   name: Theras
   variable: true
   description: Theras is a variable Thaana font that is also available in 9 weights.
+  homepage: https://thaana.com/theras/
   files:
   - label: Variable
     format: TTF
@@ -201,6 +218,7 @@ families:
   name: Viethaana
   variable: false
   description: A homage to Saigon, Viethaana is a playful Thaana font inspired by the typescape of Vietnam.
+  homepage: https://thaana.com/viethaana/
   files:
   - label: Static
     format: TTF
@@ -211,6 +229,7 @@ families:
   variable: true
   description: Zaana Thedhu typeface has been derived from the written thaana translated to visually simplify the vertical
     arrangements for the ease of user readability and design usage.
+  homepage: https://thaana.com/zaana-thedhu/
   files:
   - label: Variable
     format: TTF

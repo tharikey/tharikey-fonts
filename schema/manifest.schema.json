@@ -68,7 +68,7 @@
       "required": [
         "id", "name", "nameDv", "foundry", "designer", "copyright", "description", "descriptionDv",
         "tier", "license", "category", "version", "updated", "variable", "weights", "formats",
-        "files", "purchaseUrl", "previews"
+        "files", "purchaseUrl", "homepage", "previews"
       ],
       "additionalProperties": false,
       "properties": {
@@ -94,6 +94,7 @@
         "formats": { "type": "array", "items": { "type": "string", "enum": ["TTF", "OTF", "WOFF2"] } },
         "files": { "type": "array", "items": { "$ref": "#/$defs/file" } },
         "purchaseUrl": { "type": ["string", "null"] },
+        "homepage": { "type": ["string", "null"], "description": "The family's own page on the foundry site (e.g. thaana.com/bolhu/)." },
         "previews": { "type": "array", "items": { "type": "string" } }
       },
       "allOf": [

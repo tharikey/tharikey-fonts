@@ -101,6 +101,7 @@ def build_family(raw: dict, foundry: dict, assets: Path, used_licenses: set, bas
         "formats": raw.get("formats", ["TTF"]),
         "files": [],
         "purchaseUrl": None,
+        "homepage": raw.get("homepage"),
         "previews": raw.get("previews", []),
     }
 
