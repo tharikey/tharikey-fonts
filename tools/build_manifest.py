@@ -28,7 +28,8 @@ except ImportError:
 ROOT = Path(__file__).resolve().parent.parent
 FOUNDRIES = ROOT / "foundries"
 SCHEMA = ROOT / "schema" / "manifest.schema.json"
-OUT = ROOT / "dist" / "manifest.json"
+OUT = ROOT / "dist" / "manifest.json"          # pretty — for diffing/inspection
+OUT_MIN = ROOT / "dist" / "manifest.min.json"  # compact — what consumers fetch
 SCHEMA_VERSION = 1
 EXT = {"TTF": "ttf", "OTF": "otf", "WOFF2": "woff2"}
 
@@ -130,9 +131,33 @@ def resolve_logo(meta: dict, assets: Path, foundry_id: str, base_url: str) -> st
     return None
 
 
+def build_bundle(raw: dict, foundry_id: str | None, fam_foundry: dict, seen: set) -> dict:
+    """A bundle is a curated list of existing family ids — validated, never new fonts."""
+    bid = raw["id"]
+    where = f"bundle '{bid}'" + (f" ({foundry_id})" if foundry_id else "")
+    if bid in seen:
+        sys.exit(f"error: duplicate bundle id '{bid}'")
+    seen.add(bid)
+    fams = raw.get("families") or []
+    if not fams:
+        sys.exit(f"error: {where}: must list at least one family")
+    for fid in fams:
+        if fid not in fam_foundry:
+            sys.exit(f"error: {where}: references unknown family '{fid}'")
+        if foundry_id and fam_foundry[fid] != foundry_id:
+            sys.exit(f"error: {where}: references '{fid}' from another foundry "
+                     f"('{fam_foundry[fid]}') — only root bundles.yaml may mix foundries")
+    return {
+        "id": bid, "name": raw["name"], "nameDv": raw.get("nameDv"),
+        "description": raw.get("description", ""), "descriptionDv": raw.get("descriptionDv"),
+        "foundry": foundry_id, "families": fams, "featured": bool(raw.get("featured", False)),
+    }
+
+
 def build(base_url: str) -> dict:
     registry = load_yaml(ROOT / "licenses.yaml")
     foundries, families, used_licenses, seen_ids = [], [], set(), set()
+    raw_bundles: list = []  # (raw_bundle, foundry_id | None)
 
     for fdir in sorted(p for p in FOUNDRIES.iterdir() if p.is_dir()):
         meta = load_yaml(fdir / "meta.yaml")
@@ -145,12 +170,20 @@ def build(base_url: str) -> dict:
             "descriptionDv": meta.get("descriptionDv"),
             "logo": resolve_logo(meta, assets, meta["id"], base_url),
         })
-        for raw in load_yaml(fdir / "catalog.yaml").get("families", []):
+        catalog = load_yaml(fdir / "catalog.yaml")
+        for raw in catalog.get("families", []):
             fam = build_family(raw, meta, assets, used_licenses, base_url)
             if fam["id"] in seen_ids:
                 sys.exit(f"error: duplicate family id '{fam['id']}'")
             seen_ids.add(fam["id"])
             families.append(fam)
+        for rb in catalog.get("bundles", []):  # a foundry's own bundles
+            raw_bundles.append((rb, meta["id"]))
+
+    # Cross-foundry collections we curate (may mix foundries).
+    if (ROOT / "bundles.yaml").exists():
+        for rb in load_yaml(ROOT / "bundles.yaml").get("bundles", []):
+            raw_bundles.append((rb, None))
 
     licenses = []
     for lid in sorted(used_licenses):
@@ -159,12 +192,18 @@ def build(base_url: str) -> dict:
             sys.exit(f"error: license id '{lid}' referenced but not in licenses.yaml")
         licenses.append({"id": lid, "name": lic["name"], "url": lic.get("url")})
 
+    fam_foundry = {f["id"]: f["foundry"] for f in families}
+    bundles, seen_bundle_ids = [], set()
+    for rb, foundry_id in raw_bundles:
+        bundles.append(build_bundle(rb, foundry_id, fam_foundry, seen_bundle_ids))
+
     return {
         "version": SCHEMA_VERSION,
         "generatedAt": datetime.date.today().isoformat(),
         "licenses": licenses,
         "foundries": foundries,
         "families": families,
+        "bundles": bundles,
     }
 
 
@@ -190,13 +229,15 @@ def main() -> None:
 
     n_free = sum(1 for f in manifest["families"] if f["tier"] == "free")
     summary = (f"{len(manifest['foundries'])} foundries, {len(manifest['licenses'])} licenses, "
-               f"{len(manifest['families'])} families ({n_free} free, {len(manifest['families']) - n_free} premium)")
+               f"{len(manifest['families'])} families ({n_free} free, {len(manifest['families']) - n_free} premium), "
+               f"{len(manifest['bundles'])} bundles")
     if args.check:
         print(f"ok: manifest valid — {summary}")
         return
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {OUT.relative_to(ROOT)} — {summary}")
+    OUT_MIN.write_text(json.dumps(manifest, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"wrote {OUT.relative_to(ROOT)} + {OUT_MIN.name} — {summary}")
 
 
 if __name__ == "__main__":

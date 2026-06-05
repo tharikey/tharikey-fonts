@@ -4,7 +4,7 @@
   "title": "ThariKey font manifest",
   "description": "The compiled font catalog consumed by the macOS app and the website. Built from per-foundry meta.yaml + catalog.yaml fragments — do not hand-edit dist/manifest.json.",
   "type": "object",
-  "required": ["version", "generatedAt", "licenses", "foundries", "families"],
+  "required": ["version", "generatedAt", "licenses", "foundries", "families", "bundles"],
   "additionalProperties": false,
   "properties": {
     "version": { "type": "integer", "const": 1, "description": "Schema version; consumers check it." },
@@ -15,7 +15,12 @@
       "items": { "$ref": "#/$defs/license" }
     },
     "foundries": { "type": "array", "items": { "$ref": "#/$defs/foundry" } },
-    "families": { "type": "array", "items": { "$ref": "#/$defs/family" } }
+    "families": { "type": "array", "items": { "$ref": "#/$defs/family" } },
+    "bundles": {
+      "type": "array",
+      "description": "Curated collections — each a list of family ids (not new fonts). The app installs all or individually.",
+      "items": { "$ref": "#/$defs/bundle" }
+    }
   },
   "$defs": {
     "foundry": {
@@ -30,6 +35,21 @@
         "description": { "type": "string" },
         "descriptionDv": { "type": ["string", "null"] },
         "logo": { "type": ["string", "null"], "description": "Brand asset URL; null until hosted." }
+      }
+    },
+    "bundle": {
+      "type": "object",
+      "required": ["id", "name", "nameDv", "description", "descriptionDv", "foundry", "families", "featured"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "name": { "type": "string" },
+        "nameDv": { "type": ["string", "null"] },
+        "description": { "type": "string" },
+        "descriptionDv": { "type": ["string", "null"] },
+        "foundry": { "type": ["string", "null"], "description": "Foundry id for a foundry's own bundle; null = cross-foundry curation." },
+        "families": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "minItems": 1 },
+        "featured": { "type": "boolean" }
       }
     },
     "license": {

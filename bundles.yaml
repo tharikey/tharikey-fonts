@@ -1,0 +1,10 @@
+# Cross-foundry collections we curate. Each bundle is a list of EXISTING family ids (no font data here).
+# A foundry's own bundle goes in its catalog.yaml under a `bundles:` key instead. The build errors on a
+# duplicate bundle id or an unknown family id, so a typo can't poison the manifest.
+
+bundles:
+  - id: essentials
+    name: Essentials
+    description: A workhorse set for everyday Thaana — body text, UI, monospace, and a display face.
+    families: [bolhu, kolhu, masnooee-mono, theras]
+    featured: true
