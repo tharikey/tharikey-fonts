@@ -12,8 +12,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/bolhu/Bolhu-vf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Bolhu is a variable Thaana font that is also available in 9 weights.
 - id: faagathi-dheli
   name: Faagathi Dheli
   variable: false
@@ -22,8 +21,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/faagathi-dheli/FaagathiDheli-ttf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Faagathi Dheli features letterforms inspired by handwritten manuscripts of the early 1900s.
 - id: faagathi-neon
   name: Faagathi Neon
   variable: false
@@ -33,8 +31,8 @@ families:
     archive: zip
     url: https://thaana.com/faagathi-neon/FaagathiNeon-ttf.zip
   version: '02'
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Faagathi Neon is a monoline version of Faagathi Dheli that features letterforms inspired by handwritten manuscripts
+    of the early 1900s.
 - id: faaru-punk
   name: Faaru Punk
   variable: false
@@ -44,8 +42,7 @@ families:
     archive: zip
     url: https://thaana.com/faaru-punk/FaaruPunk-ttf.zip
   version: '1.10'
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Faaru Punk is a Thaana punk font. Available in 2 weights and features reverse slant, cut strokes and irregularity.
 - id: fanara
   name: Fanara
   variable: false
@@ -54,8 +51,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/fanara/Fanara-ttf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Fanara is a Thaana geometric typeface in 4 weights.
 - id: fanara-golhi
   name: Fanara Golhi
   variable: true
@@ -65,8 +61,7 @@ families:
     archive: zip
     url: https://thaana.com/fanara-golhi/FanaraGolhi-vf.zip
   version: '2.10'
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Fanara Golhi is a variable Thaana font that is also available in 9 weights.
 - id: fiyuzu
   name: Fiyuzu
   variable: false
@@ -75,8 +70,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/fiyuzu/Fiyuzu-ttf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Fiyuzu is a Thaana display typeface designed in 2002
 - id: gurafiku
   name: Gurafiku
   variable: false
@@ -86,8 +80,7 @@ families:
     archive: zip
     url: https://thaana.com/gurafiku/Gurafiku-ttf.zip
   version: '1.12'
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Gurafiku is an irregular Thaana display font. Featuring crude angular letterforms - straight lines for everything.
 - id: haluvidhaa
   name: Haluvidhaa
   variable: false
@@ -97,8 +90,7 @@ families:
     archive: zip
     url: https://thaana.com/haluvidhaa/Haluvidhaa-ttf.zip
   version: 1.0a
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Haluvidhaa is a funky bubbly Thaana font designed for cute energetic designs.
 - id: hawwa
   name: Hawwa
   variable: false
@@ -108,8 +100,7 @@ families:
     archive: zip
     url: https://thaana.com/hawwa/Hawwa-ttf.zip
   version: '1.12'
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Hawwa is a lively multi-purpose Thaana brush font.
 - id: kolhu
   name: Kolhu
   variable: true
@@ -118,8 +109,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/kolhu/Kolhu-vf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Kolhu is an upright grotesk, a variable Thaana font also available in 9 weights.
 - id: lcd-thaana
   name: Lcd Thaana
   variable: false
@@ -129,8 +119,7 @@ families:
     archive: zip
     url: https://thaana.com/lcd-thaana/LCDThaana-ttf.zip
   version: '1.12'
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: LCD Thaana is a typeface that mimics segmented LCD displays
 - id: masnooee-mono
   name: Masnooee Mono
   variable: false
@@ -139,8 +128,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/masnooee-mono/MasnooeeMono-ttf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Masnooee Mono is a Thaana monospaced typeface
 - id: motaru-dhigu
   name: Motaru Dhigu
   variable: false
@@ -149,8 +137,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/motaru-dhigu/MotaruDhigu-ttf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Motaru Dhigu is a Thaana typeface based on natural handwriting with exaggerated elongated strokes.
 - id: motaru-square
   name: Motaru Square
   variable: false
@@ -159,8 +146,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/motaru-square/MotaruSquare-ttf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Motaru Square is a Thaana typeface designed with perfect square edges.
 - id: sangu-suruhee
   name: Sangu Suruhee
   variable: false
@@ -170,8 +156,8 @@ families:
     archive: zip
     url: https://thaana.com/sangu-suruhee/SanguSuruhee-ttf.zip
   version: '1.12'
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Sangu Suruhee is a Thaana headline typeface that was used in the 1990 news magazine Sangu. It was originally
+    created as a stencil by Adam Ibrahim (Fankaa) for Studio-1. This grotesk form was redrawn and digitised by Hasan Shazil.
 - id: theras
   name: Theras
   variable: true
@@ -180,8 +166,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/theras/Theras-vf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Theras is a variable Thaana font that is also available in 9 weights.
 - id: viethaana
   name: Viethaana
   variable: false
@@ -190,8 +175,7 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/viethaana/Viethaana-ttf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: A homage to Saigon, Viethaana is a playful Thaana font inspired by the typescape of Vietnam.
 - id: zaana-thedhu
   name: Zaana Thedhu
   variable: true
@@ -200,5 +184,5 @@ families:
     format: TTF
     archive: zip
     url: https://thaana.com/zaana-thedhu/ZaanaThedhu-vf.zip
-  description: "ހުށިޔާރު މުށި ހިޔަޅު ކަންނެތް ސޭޓުގެ ބޯމަތިން ފުންމާލީ\n                    ޕޯޗުގީޒު ދޫނި ޖޯޑުގެ ކައިވެންޏަށް\
-    \ ގަތް އޮޱަކުން"
+  description: Zaana Thedhu typeface has been derived from the written thaana translated to visually simplify the vertical
+    arrangements for the ease of user readability and design usage.

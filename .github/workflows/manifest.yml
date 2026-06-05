@@ -38,13 +38,25 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          AWS_DEFAULT_REGION: auto          # R2 requires a region; "auto" is correct.
+          # aws-cli v2 (>=2.23) enables data-integrity checksums that R2 rejects ("STREAMING-…-TRAILER").
+          # Force them off so PUTs succeed against R2.
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+          AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
         run: |
           set -euo pipefail
-          aws s3 cp dist/manifest.json "s3://$R2_BUCKET/manifest.json" \
-            --endpoint-url "$R2_ENDPOINT" --content-type application/json
+          ct() { case "${1##*.}" in
+            ttf) echo font/ttf;; otf) echo font/otf;; woff2) echo font/woff2;;
+            zip) echo application/zip;; svg) echo image/svg+xml;; png) echo image/png;;
+            json) echo application/json;; txt) echo text/plain;; *) echo application/octet-stream;;
+          esac; }
+          # Manifest: short cache so the app/site pick up new releases promptly.
+          aws s3 cp dist/manifest.json "s3://$R2_BUCKET/manifest.json" --endpoint-url "$R2_ENDPOINT" \
+            --content-type application/json --cache-control "public, max-age=300, must-revalidate"
           # Each foundry's assets/ (fonts, logo, license text) → s3://bucket/<foundry>/<file>.
-          # No-op until any assets are vendored.
+          # Long cache — asset filenames are stable. No-op until any assets are vendored.
           find foundries -path '*/assets/*' -type f | while read -r f; do
             rel="${f#foundries/}"; key="${rel/\/assets\//\/}"   # <foundry>/<file>
-            aws s3 cp "$f" "s3://$R2_BUCKET/$key" --endpoint-url "$R2_ENDPOINT"
+            aws s3 cp "$f" "s3://$R2_BUCKET/$key" --endpoint-url "$R2_ENDPOINT" \
+              --content-type "$(ct "$f")" --cache-control "public, max-age=31536000, immutable"
           done

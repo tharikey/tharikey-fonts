@@ -73,6 +73,40 @@ def discover_slugs(index: BeautifulSoup) -> list[str]:
     return slugs
 
 
+# Keyword → category seeding (from the name + description). Best-effort first-pass tags for the app's
+# browse/filter; a human can correct stragglers in the catalog. Deterministic, so it survives re-crawl.
+CATEGORY_KEYWORDS = {
+    "monospace": ("monospace", "monospaced", "tabular"),
+    "handwriting": ("handwrit", "brush", "script", "calligraph", "cursive", "bubbly"),
+    "display": ("display", "headline", "poster", "decorative", "punk", "neon", "lcd",
+                "segment", "irregular", "crude", "graffiti", "square"),
+    "sans": ("sans", "grotesk", "grotesque", "geometric", "upright", "workhorse"),
+}
+
+
+def infer_categories(text: str) -> list[str]:
+    t = text.lower()
+    cats = [cat for cat, kws in CATEGORY_KEYWORDS.items() if any(k in t for k in kws)]
+    if "serif" in t and "sans" not in t:  # avoid the "sans-serif" false positive
+        cats.append("serif")
+    return cats
+
+
+def extract_description(page: BeautifulSoup) -> str:
+    """The real (English) description — NOT the Thaana pangram specimen. Prefer <meta description>, else
+    the first substantial, mostly-Latin <p> (Thaana specimen paragraphs are skipped by the Latin ratio)."""
+    md = page.find("meta", attrs={"name": "description"})
+    if md and (c := (md.get("content") or "").strip()) and len(c) > 40:
+        return c
+    for p in page.find_all("p"):
+        t = p.get_text(" ", strip=True)
+        letters = [c for c in t if c.isalpha()]
+        latin = sum(1 for c in letters if c.isascii())
+        if len(t) > 40 and letters and latin / len(letters) > 0.5:
+            return t
+    return ""
+
+
 def crawl_family(slug: str) -> dict | None:
     page = get(urljoin(BASE, f"{slug}/"))
     # Download hrefs end in .zip but carry a `?v=<version>` cache-bust query, e.g.
@@ -94,7 +128,7 @@ def crawl_family(slug: str) -> dict | None:
     variable = vf is not None
     h1 = page.find(["h1", "h2"])
     name = h1.get_text(strip=True) if h1 else slug.replace("-", " ").title()
-    desc = next((t for p in page.find_all("p") if len(t := p.get_text(strip=True)) > 40), "")
+    desc = extract_description(page)
 
     fam = {
         "id": slug,
