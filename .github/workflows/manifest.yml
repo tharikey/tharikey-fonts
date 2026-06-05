@@ -50,9 +50,11 @@ jobs:
             zip) echo application/zip;; svg) echo image/svg+xml;; png) echo image/png;;
             json) echo application/json;; txt) echo text/plain;; *) echo application/octet-stream;;
           esac; }
-          # Manifest: short cache so the app/site pick up new releases promptly.
-          aws s3 cp dist/manifest.json "s3://$R2_BUCKET/manifest.json" --endpoint-url "$R2_ENDPOINT" \
-            --content-type application/json --cache-control "public, max-age=300, must-revalidate"
+          # Manifest (both pretty + minified; consumers fetch the .min). Short cache so new releases land promptly.
+          for f in manifest.json manifest.min.json; do
+            aws s3 cp "dist/$f" "s3://$R2_BUCKET/$f" --endpoint-url "$R2_ENDPOINT" \
+              --content-type application/json --cache-control "public, max-age=300, must-revalidate"
+          done
           # Each foundry's assets/ (fonts, logo, license text) → s3://bucket/<foundry>/<file>.
           # Long cache — asset filenames are stable. No-op until any assets are vendored.
           find foundries -path '*/assets/*' -type f | while read -r f; do
