@@ -1,0 +1,7 @@
+# build (tools/build_manifest.py)
+pyyaml>=6
+jsonschema>=4
+
+# crawler only (tools/crawl_thaana.py) — network sourcing, not needed to build the manifest
+requests>=2
+beautifulsoup4>=4

@@ -1,0 +1,10 @@
+# License registry — fragments reference these by id (family.license / foundry.defaultLicense).
+# The compiler expands the id into { id, name, url } in the manifest.
+
+OFL-1.1:
+  name: SIL Open Font License 1.1
+  url: https://openfontlicense.org
+
+AkuruType-Commercial:
+  name: Akuru Type Commercial License
+  url: https://www.akurutype.com

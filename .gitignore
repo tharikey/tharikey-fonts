@@ -1,0 +1,8 @@
+# Build artifact — CI compiles it from the fragments and pushes it to R2; not committed (the YAML
+# fragments are the source of truth, and `generatedAt` would churn the diff daily).
+/dist/
+
+__pycache__/
+*.pyc
+.DS_Store
+.venv/

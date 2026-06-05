@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tharikey.com/fonts/manifest.schema.json",
+  "title": "ThariKey font manifest",
+  "description": "The compiled font catalog consumed by the macOS app and the website. Built from per-foundry meta.yaml + catalog.yaml fragments — do not hand-edit dist/manifest.json.",
+  "type": "object",
+  "required": ["version", "generatedAt", "licenses", "foundries", "families"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "const": 1, "description": "Schema version; consumers check it." },
+    "generatedAt": { "type": "string", "description": "Build date (YYYY-MM-DD)." },
+    "licenses": {
+      "type": "array",
+      "description": "License registry (every license referenced by a family). Families point at these by id, the same way they point at foundries.",
+      "items": { "$ref": "#/$defs/license" }
+    },
+    "foundries": { "type": "array", "items": { "$ref": "#/$defs/foundry" } },
+    "families": { "type": "array", "items": { "$ref": "#/$defs/family" } }
+  },
+  "$defs": {
+    "foundry": {
+      "type": "object",
+      "required": ["id", "name", "nameDv", "url", "description", "descriptionDv", "logo"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "name": { "type": "string" },
+        "nameDv": { "type": ["string", "null"], "description": "Dhivehi name (for the Dhivehi UI)." },
+        "url": { "type": ["string", "null"] },
+        "description": { "type": "string" },
+        "descriptionDv": { "type": ["string", "null"] },
+        "logo": { "type": ["string", "null"], "description": "Brand asset URL; null until hosted." }
+      }
+    },
+    "license": {
+      "type": "object",
+      "required": ["id", "name", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": ["string", "null"] }
+      }
+    },
+    "file": {
+      "type": "object",
+      "description": "A downloadable artifact for the family — a single font file, or an archive containing the family. The app downloads `url`, unpacks if `archive`, and registers the font(s).",
+      "required": ["label", "format", "archive", "url", "sha256", "bytes"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "description": "Display label for the artifact, e.g. \"Variable\", \"Static\", \"WOFF2\"." },
+        "format": { "type": "string", "enum": ["TTF", "OTF", "WOFF2"], "description": "Font format inside." },
+        "archive": {
+          "type": ["string", "null"],
+          "enum": ["zip", null],
+          "description": "Set when `url` is an archive (the app unpacks it and registers the font(s) within). null = `url` is the font file itself."
+        },
+        "url": {
+          "type": ["string", "null"],
+          "description": "Download URL. We-host: stamped from R2 (null until vendored). Foundry-hosts: the foundry's own URL (their telemetry)."
+        },
+        "sha256": { "type": ["string", "null"], "description": "Integrity hash of the download; null if unknown." },
+        "bytes": { "type": ["integer", "null"], "description": "Size of the download; null if unknown." }
+      }
+    },
+    "family": {
+      "type": "object",
+      "required": [
+        "id", "name", "nameDv", "foundry", "designer", "copyright", "description", "descriptionDv",
+        "tier", "license", "category", "version", "updated", "variable", "weights", "formats",
+        "files", "purchaseUrl", "previews"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "name": { "type": "string" },
+        "nameDv": { "type": ["string", "null"] },
+        "foundry": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "designer": { "type": "string", "description": "The author / designer." },
+        "copyright": { "type": ["string", "null"], "description": "Copyright string (OFL attribution)." },
+        "description": { "type": "string" },
+        "descriptionDv": { "type": ["string", "null"] },
+        "tier": { "type": "string", "enum": ["free", "premium"] },
+        "license": { "type": "string", "description": "License id — resolves against the top-level `licenses` registry." },
+        "category": {
+          "type": "array",
+          "description": "Browse/filter tags.",
+          "items": { "type": "string", "enum": ["sans", "serif", "display", "monospace", "handwriting"] }
+        },
+        "version": { "type": ["string", "null"] },
+        "updated": { "type": ["string", "null"], "description": "Last-updated date (YYYY-MM-DD)." },
+        "variable": { "type": "boolean" },
+        "weights": { "type": "integer", "minimum": 1 },
+        "formats": { "type": "array", "items": { "type": "string", "enum": ["TTF", "OTF", "WOFF2"] } },
+        "files": { "type": "array", "items": { "$ref": "#/$defs/file" } },
+        "purchaseUrl": { "type": ["string", "null"] },
+        "previews": { "type": "array", "items": { "type": "string" } }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "tier": { "const": "free" } } },
+          "then": {
+            "properties": { "purchaseUrl": { "const": null } },
+            "not": { "properties": { "files": { "maxItems": 0 } } }
+          }
+        },
+        {
+          "if": { "properties": { "tier": { "const": "premium" } } },
+          "then": {
+            "properties": {
+              "files": { "maxItems": 0 },
+              "purchaseUrl": { "type": "string" }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

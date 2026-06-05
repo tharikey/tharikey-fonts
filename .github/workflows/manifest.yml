@@ -1,0 +1,50 @@
+name: font manifest
+
+# The catalog ships independently of the website: every push validates the fragments, and main compiles
+# the manifest + uploads it (and the hosted OFL files) straight to Cloudflare R2 behind fonts.tharikey.com.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Validate fragments against the schema
+        run: python3 tools/build_manifest.py --check
+
+  deploy:
+    needs: check
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Compile manifest
+        run: python3 tools/build_manifest.py --base-url "https://fonts.tharikey.com"
+      # Push the manifest + hosted OFL files to the R2 bucket served at fonts.tharikey.com.
+      # Uses the S3-compatible API; secrets configured in the repo settings.
+      #   R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY / R2_ACCOUNT_ID / R2_BUCKET
+      - name: Upload to R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+        run: |
+          set -euo pipefail
+          aws s3 cp dist/manifest.json "s3://$R2_BUCKET/manifest.json" \
+            --endpoint-url "$R2_ENDPOINT" --content-type application/json
+          # Each foundry's assets/ (fonts, logo, license text) → s3://bucket/<foundry>/<file>.
+          # No-op until any assets are vendored.
+          find foundries -path '*/assets/*' -type f | while read -r f; do
+            rel="${f#foundries/}"; key="${rel/\/assets\//\/}"   # <foundry>/<file>
+            aws s3 cp "$f" "s3://$R2_BUCKET/$key" --endpoint-url "$R2_ENDPOINT"
+          done

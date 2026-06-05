@@ -1,0 +1,7 @@
+id: akuru
+name: Akuru Type
+url: https://www.akurutype.com
+description: Premium Thaana type foundry. Families link out to the foundry for purchase.
+logo: logo.svg
+defaultLicense: AkuruType-Commercial
+defaultTier: premium

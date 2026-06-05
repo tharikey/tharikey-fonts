@@ -1,0 +1,10 @@
+id: thaana
+name: Thaana.com
+# nameDv: ތާނަ.com        # optional Dhivehi name for the Dhivehi UI
+url: https://thaana.com
+description: Community foundry; all families are released under the SIL Open Font License.
+# descriptionDv: ...
+logo: logo.svg            # in assets/ — pushed to R2, resolved to a URL when present
+defaultLicense: OFL-1.1   # families inherit unless they set their own `license:`
+defaultTier: free         # families inherit unless they set their own `tier:`
+defaultDesigner: Ayeshath Fadwa & Shahee Ilyas   # families inherit unless they set `designer:`

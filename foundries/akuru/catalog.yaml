@@ -1,0 +1,27 @@
+# Akuru Type families — all premium (inherited from meta.yaml). We never host these; each links out to
+# the foundry to purchase. purchaseUrl inherits the foundry url unless a family overrides it.
+
+families:
+  - id: akuru-display
+    name: Akuru Display
+    description: Premium high-contrast display family for branding.
+    category: [display]
+    variable: true
+    weights: 6
+    formats: [OTF, TTF]
+
+  - id: encreare-sans
+    name: Encreare Sans
+    description: A refined text family crafted for editorial work.
+    category: [sans]
+    variable: false
+    weights: 5
+    formats: [OTF]
+
+  - id: akuru-script
+    name: Akuru Script
+    description: Flowing calligraphic Thaana for expressive headlines.
+    category: [handwriting]
+    variable: false
+    weights: 2
+    formats: [OTF]
