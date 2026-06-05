@@ -130,17 +130,15 @@ def crawl_family(slug: str) -> dict | None:
     name = h1.get_text(strip=True) if h1 else slug.replace("-", " ").title()
     desc = extract_description(page)
 
-    fam = {
-        "id": slug,
-        "name": name,
-        "variable": variable,
-        "files": [{"label": "Variable" if variable else "Static",
-                   "format": "TTF", "archive": "zip", "url": url}],
-    }
+    fam = {"id": slug, "name": name, "variable": variable}
+    if cats := infer_categories(f"{name} {desc}"):
+        fam["category"] = cats
     if version:
         fam["version"] = version
     if desc:
         fam["description"] = desc
+    fam["files"] = [{"label": "Variable" if variable else "Static",
+                     "format": "TTF", "archive": "zip", "url": url}]
     return fam
 
 
