@@ -3,6 +3,8 @@
 The font catalog for **ThariKey** — the source of truth for the font manifest. Per-foundry YAML is
 compiled into one schema-validated `manifest.json` that downstream clients fetch.
 
+> Reference docs — [manifest format](docs/manifest.md) and [authoring](docs/authoring.md) — live in [`docs/`](docs/).
+
 ## Layout
 
 ```
