@@ -1,4 +1,6 @@
-# Authoring
+---
+title: "Authoring"
+---
 
 Everything is YAML compiled by `tools/build_manifest.py`. Run `python3 tools/build_manifest.py --check`
 before opening a PR — it schema-validates and **hard-errors** on the mistakes that would poison the

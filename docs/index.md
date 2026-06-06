@@ -1,4 +1,6 @@
-# Font catalog
+---
+title: "Font catalog"
+---
 
 ThariKey's font catalog is a **published manifest** — a single JSON file listing the Thaana font families
 and curated collections available in the app, with where to get each one. It's compiled from per-foundry

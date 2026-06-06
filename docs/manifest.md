@@ -1,4 +1,6 @@
-# Manifest format
+---
+title: "Manifest format"
+---
 
 The compiled catalog (`manifest.json`). The authoritative contract is
 [`schema/manifest.schema.json`](https://github.com/tharikey/tharikey-fonts/blob/main/schema/manifest.schema.json);
