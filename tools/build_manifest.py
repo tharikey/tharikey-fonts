@@ -72,6 +72,17 @@ def build_files(assets: Path, fam_files: list, fid: str, foundry_id: str, base_u
     return out
 
 
+def build_previews(assets: Path, fid: str, foundry_id: str, base_url: str, raw: dict) -> list[str]:
+    """Previews are derived by convention: a `<id>-specimen*.png` vendored in the foundry's assets/ IS
+    that family's preview (rendered by build_specimens.py for our/free fonts, or dropped by hand for a
+    foundry-supplied premium specimen). Any explicit URLs in the catalog `previews:` pass through first."""
+    out: list[str] = list(raw.get("previews") or [])
+    if assets.is_dir():
+        for png in sorted(assets.glob(f"{fid}-specimen*.png")):
+            out.append(f"{base_url.rstrip('/')}/{foundry_id}/{png.name}")
+    return out
+
+
 def build_family(raw: dict, foundry: dict, assets: Path, used_licenses: set, base_url: str) -> dict:
     fid = raw["id"]
     where = f"{foundry['id']}/{fid}"
@@ -103,7 +114,7 @@ def build_family(raw: dict, foundry: dict, assets: Path, used_licenses: set, bas
         "files": [],
         "purchaseUrl": None,
         "homepage": raw.get("homepage"),
-        "previews": raw.get("previews", []),
+        "previews": build_previews(assets, fid, foundry["id"], base_url, raw),
     }
 
     if tier == "free":

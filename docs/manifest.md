@@ -38,12 +38,18 @@ foundry **by id**, so a license/foundry is defined once and never duplicated.
   "files": [ /* File */ ],        // free: how to download
   "purchaseUrl": null,            // premium: where to buy (no files)
   "homepage": "https://thaana.com/bolhu/",   // the family's page on the foundry site (nullable)
-  "previews": []                  // specimen image URLs (deferred)
+  "previews": ["https://…/thaana/bolhu-specimen.png"]   // specimen image URLs
 }
 ```
 
 Nullable everywhere it makes sense (`nameDv`, `copyright`, `version`, `homepage`, …); the key is always
 present so the shape is stable.
+
+**`previews` is derived by convention** — a `<id>-specimen*.png` vendored in a foundry's `assets/`
+becomes that family's preview URL (the build stamps the hosted URL, like it does for `files`). For our
+own + free fonts, `tools/build_specimens.py` renders those PNGs from the actual font (dev-local, via
+`hb-view`); for premium fonts the foundry supplies the image and you drop it into `assets/` by hand.
+Explicit URLs in a catalog `previews:` list pass through too.
 
 ### File (a download)
 

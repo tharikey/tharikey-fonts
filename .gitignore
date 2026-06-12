@@ -6,3 +6,7 @@ __pycache__/
 *.pyc
 .DS_Store
 .venv/
+
+# Specimen generator scratch — downloaded/unpacked fonts cached by tools/build_specimens.py. The PNGs it
+# renders into foundries/*/assets/ ARE committed; this is just the re-download/unpack cache.
+.cache/

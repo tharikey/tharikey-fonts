@@ -5,3 +5,6 @@ jsonschema>=4
 # crawler only (tools/crawl_thaana.py) — network sourcing, not needed to build the manifest
 requests>=2
 beautifulsoup4>=4
+
+# specimen generator only (tools/build_specimens.py) — dev-local, not needed to build the manifest.
+# Uses `requests` (above) + `hb-view` from HarfBuzz (system dep: `brew install harfbuzz`).
